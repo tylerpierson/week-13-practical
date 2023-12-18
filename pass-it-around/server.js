@@ -10,6 +10,35 @@ app.get('/', (req, res) => {
         `)
 })
 
+// Fibonacci Number
+
+app.get('/fibonacci/:num', (req, res) => {
+    const inputNumber = parseInt(req.params.num)
+
+    function isPerfectSquare(n) {
+    const sqrt = Math.sqrt(n);
+    return sqrt === Math.floor(sqrt);
+    }
+
+    function isFibonacciNumber(number) {
+    return (
+        isPerfectSquare(5 * number ** 2 + 4) ||
+        isPerfectSquare(5 * number ** 2 - 4)
+    );
+    }
+
+
+    if (isFibonacciNumber(inputNumber)) {
+        res.send(`
+        <h1>Very good. It is Fibonacci.</h1>
+        `)
+    } else {
+        res.send(`
+        <h1>I can tell this is not a Fibonacci number</h1>
+        `)
+    }
+})
+
 app.get('/:number_of_bottles', (req, res) => {
     const numBottles = parseInt(req.params.number_of_bottles)
     let nextBottle = numBottles - 1
